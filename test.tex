@@ -1,0 +1,215 @@
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{lastpage} % To read number of pages
+\usepackage[polish]{babel}
+\usepackage[OT4]{fontenc}
+\usepackage[cp1250]{inputenc}
+\usepackage{fancyhdr, blindtext}
+\usepackage{xkeyval}
+\usepackage{chngcntr}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{pst-barcode}
+%----------------------------------------------------------------------------------------
+%	Fancy footer configuration - fancyhdr
+%----------------------------------------------------------------------------------------
+\fancypagestyle{plain}{
+\fancyhead[L]{\includegraphics[width=0.1\columnwidth]{elka}}
+\fancyhead[R]{}
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{}
+\fancyfoot[L]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+\fancyhead{}
+\fancyfoot[R]{\thepage\ / \protect\pageref{LastPage}}
+\fancyfoot[C]{}
+\fancyhead[L]{\hmwkTitle}
+\fancyhead[R]{\hmwkClass}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%\definecolor{DargBlue}{rgb}{0.188,0.192,0.565} % This is the color used for comments
+%\renewcommand{\headrule}{\hbox to\headwidth{%
+%    \color{DargBlue}\leaders\hrule height \headrulewidth\hfill}}
+
+% Margins
+\topmargin=-0.8in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.1} % Line spacing
+\bibliographystyle{plain}
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+%definded pseudocode languge for your modification
+\lstdefinelanguage{PseudoCode}[]{}{
+  morekeywords={function,Function, program,  for, Array, For, While, If, if, Where, where, new, else, Else, Then, then, Find, find, Select, select, Stack, stack, struct, Struct, Do, do, end, End, set, Set, false, False, True, true}
+  morecomment=[l]{//},
+  morecomment=[l]{\%},
+  morecomment=[s]{/*}{*/},
+  % FIXME: listings does not see guillemots, so any regions with them wont work  
+  morecomment=[s]{«REM»}{«ENDREM»},
+  morecomment=[s]{«REM}{»},
+  morestring=[s]{'}{'},
+  morestring=[s]{"}{"},
+  escapechar={@},
+  % required for use with UTF-8
+}
+
+
+
+\newcommand{\lstlanguage}[1]
+{
+\lstloadlanguages{#1} % Load languge syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=#1, % Use Perl in this example
+		  captionpos=b,
+        frame=single, % Single frame around code
+		  breaklines=true, %Break lines
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % functions bold and blue
+        keywordstyle=[2]\color{Purple}, % function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5, % Line numbers go in steps of 5
+}
+}
+\makeatletter
+\define@key{script}{label}{\def\LabelName{#1}}
+\define@key{script}{caption}{\def\CaptionName{#1}}
+\define@key{script}{language}{\def\LanguageName{#1}}
+%\define@key{script}{file}{\def\{#1}}
+\setkeys{script}{label=none,caption=none,language=Java}
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\makeatother
+\newcommand\hmwkScript[2][]{
+\begingroup
+\setkeys{script}{#1}
+\lstlanguage{\LanguageName }
+\lstinputlisting[caption=\CaptionName,label=\LabelName]{#2}
+\endgroup
+}
+
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Name of the project} % Assignment title
+\newcommand{\hmwkDueDate}{2013.01.24} % Due date
+\newcommand{\hmwkClass}{Name of the subject} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Name of the teacher} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{
+ LastName1 FirstName1\\
+  \texttt{first1.last1@xxxxx.com}
+  \and
+  LastName2 FirstName2\\
+  \texttt{first2.last2@xxxxx.com}
+}
+ % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.3in}\small{\hmwkDueDate}\\
+\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+}
+
+\author{\hmwkAuthorName}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+\begin{titlepage} % creating a titlepage with fency footers and headers
+\thispagestyle{plain} %use this fency style
+\maketitle 
+\end{titlepage}
+\setcounter{page}{2}
+\pagestyle{fancy} % come back to standard styles
+
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\section{Standard text}
+Polish letters: ¹ ê ó Ÿ ¿ œ æ ñ "œwiêta". You can add cite from bibliograpfy\cite{Boney96}.  
+\section{Source code listings}
+% To have just one problem per page, simply put a \clearpage after each problem
+Listing \ref{lst:hwe} shows a Script.
+
+\lstlanguage{[Sharp]C} %C++, [Sharp]C, Java, Python, PseudoCode
+\lstinputlisting[label=lst:hwe, caption=Sample]{homework_example.cs}
+
+\lstlanguage{PseudoCode}
+\lstinputlisting[label=lst:psc, caption=Sample decription]{pseudo.cs}
+
+\section{Photos}
+You can see on picture \ref{pct:ex} example of figure 
+%h Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+%t	Position at the top of the page.
+%b	Position at the bottom of the page.
+%p	Put on a special page for floats only.
+%!	Override internal parameters LaTeX uses for determining "good" float positions.
+%H	Places the float at precisely the location in the LaTeX code. Requires the float package,[1] e.g., \usepackage{float}. This is somewhat equivalent to h!.
+	\begin{figure}[H] 
+		  \centering		   
+		      \includegraphics[width=0.75\columnwidth]{example_figure}					
+		  \caption{Sample description!}
+		  \label{pct:ex}
+		\end{figure}
+		
+You can now add more text here.
+\section{Tables}
+fhhfhfhfhfhhf\cite{miles09}
+ffhfhfhfhfhfhfhfhfhf\cite{AbedonHymanThomas2003}
+\nocite{*} %add all positions from bibliography F6/Led trick
+\bibliography{mybib}
+
+\end{document}
+
